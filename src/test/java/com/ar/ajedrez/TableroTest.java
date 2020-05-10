@@ -75,7 +75,7 @@ public class TableroTest {
     }
 
     @Test
-    public void moverPeonBlancoDeLaPosicionA2ALaPosicionA3(){
+    public void moverUnPeonUnaCasillaEnSuPrimerMovimiento(){
 
         Tablero tablero = new Tablero();
 
@@ -90,25 +90,18 @@ public class TableroTest {
     }
 
     @Test
-    public void moverPeonDosCasillasEnElTableroEnSuPrimerMovimiento(){
+    public void moverUnPeonDosCasillasEnSuPrimerMovimiento(){
 
         Tablero tablero = new Tablero();
 
         tablero.moverPieza(Posicion.A2, Posicion.A4);
 
-        Peon fichaEsperada = (Peon) tablero.obtenerPieza(Posicion.A4);
+        Ficha peonMovido = tablero.obtenerPieza(Posicion.A4);
 
-        assertThat(fichaEsperada.esPrimerMovimiento()).isEqualTo(false);
-    }
+        Ficha casillaVacia = tablero.obtenerPieza(Posicion.A2);
 
-    @Test
-    public void cuandoUnPeonNoHizoNingunMovimientoSePuedeMoverDosCasillas() {
-
-        Tablero tablero = new Tablero();
-
-        Peon peon = (Peon) tablero.obtenerPieza(Posicion.B2);
-
-        assertThat(peon.esPrimerMovimiento()).isTrue();
+        assertThat(peonMovido.getColor()).isEqualTo(Color.BLANCO);
+        assertThat(casillaVacia).isNull();
 
     }
 

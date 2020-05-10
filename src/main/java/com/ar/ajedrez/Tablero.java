@@ -42,10 +42,6 @@ public class Tablero {
             casillaDestino = this.casillas.get(destino);
             casillaDestino.setFicha(ficha);
             casillaOrigen.setFicha(null);
-
-            if(ficha instanceof Peon && ((Peon) ficha).esPrimerMovimiento()){
-                ((Peon) ficha).setPrimerMovimiento(false);
-            }
         }
     }
 
