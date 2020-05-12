@@ -9,12 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TableroTest {
 
-    //la logica de movimientos no se deberia mezclar con el modelo de juego
-
-    //yo deberia poder crear un tablero con las piezas que necesito solamente
-
-    //tengo que extraer la logica de creacion del tablero de la clase tablero
-
     @Test
     public void cuandoSeInicializaElTableroSeCompruebaLaPosicionDeLasPiezasBlancas(){
 
@@ -93,15 +87,39 @@ public class TableroTest {
     public void moverUnPeonDosCasillasEnSuPrimerMovimiento(){
 
         Tablero tablero = new Tablero();
+        String nombrePeon = "P";
+
+        tablero.moverPieza(Posicion.B2, Posicion.B4);
+
+        Ficha peonMovido = tablero.obtenerPieza(Posicion.B4);
+
+        Ficha casillaVacia = tablero.obtenerPieza(Posicion.B2);
+
+        assertThat(peonMovido.getNombre()).as("Valida que exista un peon en la casilla").isNotNull();
+        assertThat(casillaVacia).isNull();
+
+    }
+
+    @Test
+    public void moverUnPeonDosCasillasEnSuPrimerMovimientoConUnFichaEnLaCasillaDeEnfrenteNoSePuedeRalizarElMovimiento(){
+
+        List<WrapperCasilla> fichas = new ArrayList<>();
+
+        WrapperCasilla casillaUno = new WrapperCasilla(Posicion.A2, new Peon(Color.BLANCO));
+        WrapperCasilla casillaDos = new WrapperCasilla(Posicion.A3, new Peon(Color.BLANCO));
+
+        fichas.add(casillaUno);
+        fichas.add(casillaDos);
+
+        Tablero tablero =  new Tablero(TableroFactory.crearTableroCon(fichas));
 
         tablero.moverPieza(Posicion.A2, Posicion.A4);
 
-        Ficha peonMovido = tablero.obtenerPieza(Posicion.A4);
+        Ficha peonBlanco = tablero.obtenerPieza(Posicion.A2);
+        Ficha sinPieza = tablero.obtenerPieza(Posicion.A4);
 
-        Ficha casillaVacia = tablero.obtenerPieza(Posicion.A2);
-
-        assertThat(peonMovido.getColor()).isEqualTo(Color.BLANCO);
-        assertThat(casillaVacia).isNull();
+        assertThat(peonBlanco).isInstanceOf(Peon.class);
+        assertThat(sinPieza).isNull();
 
     }
 

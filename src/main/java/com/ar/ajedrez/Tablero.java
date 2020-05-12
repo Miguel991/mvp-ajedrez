@@ -6,10 +6,18 @@ import java.util.*;
 
 public class Tablero {
 
+    private ManagerTablero manager;
+
    private Map<Posicion, Casilla> casillas;
 
    public Tablero(){
        this.casillas = crearCasillas();
+       this.manager = new ManagerTablero(this.casillas);
+   }
+
+   public Tablero(Map<Posicion, Casilla> casillas){
+       this.casillas = casillas;
+       this.manager = new ManagerTablero(casillas);
    }
 
     private Map<Posicion, Casilla> crearCasillas() {
@@ -31,18 +39,8 @@ public class Tablero {
 
     public void moverPieza(Posicion origen,Posicion destino ) {
 
-        Casilla casillaOrigen = this.casillas.get(origen);
-        //comprobar si existe una pieza en la casilla origen
+       this.manager.moverPieza(origen, destino, this.casillas);
 
-        Casilla casillaDestino =  null;
-
-        Ficha ficha = casillaOrigen.getFicha();
-
-        if(ficha != null){
-            casillaDestino = this.casillas.get(destino);
-            casillaDestino.setFicha(ficha);
-            casillaOrigen.setFicha(null);
-        }
     }
 
     public List<Posicion> obtenerPosicionesValidasAPartirDeLa(Posicion posicion) {
@@ -77,16 +75,22 @@ public class Tablero {
         for(int i = 0; i < PosicionesPiezas.BLANCAS.size(); i++){
             ficha = PosicionesPiezas.PIEZAS_BLANCAS.get(i);
             ficha.setColor(Color.BLANCO);
+            ficha.setPosicion(PosicionesPiezas.BLANCAS.get(i));
             casilla = tableroInicial.get(PosicionesPiezas.BLANCAS.get(i));
             casilla.setFicha(ficha);
         }
 
         for(int i = 0; i < PosicionesPiezas.NEGRAS.size(); i++){
             ficha = PosicionesPiezas.PIEZAS_NEGRAS.get(i);
+            ficha.setPosicion(PosicionesPiezas.NEGRAS.get(i));
             ficha.setColor(Color.NEGRO);
             casilla = tableroInicial.get(PosicionesPiezas.NEGRAS.get(i));
             casilla.setFicha(ficha);
         }
 
+    }
+
+    public void setCasillas(Map<Posicion, Casilla> casillas) {
+       this.casillas = casillas;
     }
 }
