@@ -3,7 +3,7 @@ package com.ar.ajedrez;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Posicion {
+public enum Position {
 
     A1("A","1"),
     B1("B","1"),
@@ -70,41 +70,42 @@ public enum Posicion {
     G8("G","8"),
     H8("H","8");
 
-    private final String columna;
-    private final String fila;
-    private final String nombre;
+    private final String column;
+    private final String row;
+    private final String name;
 
-    private static Map<String,Posicion> posiciones = new HashMap<>();
+    private static Map<String, Position> positions = new HashMap<>();
 
-    private Posicion(String columna, String fila){
-        this.columna = columna;
-        this.fila = fila;
-        this.nombre = columna + fila;
+    private Position(String column, String row){
+        this.column = column;
+        this.row = row;
+        this.name = column + row;
     }
 
     static {
 
-        for (Posicion posicion : values()) {
-            posiciones.put(posicion.getNombre(), posicion);
+        for (Position position : values()) {
+            positions.put(position.getName(), position);
         }
 
     }
 
-    public static Posicion obtenerPosicionPorNombre(String nombre){
-        return posiciones.get(nombre);
+    public static Position getPositionByName(String nombre){
+        return positions.get(nombre);
     }
 
-    public String getColumna() {
-        return this.columna;
+    public String getColumn() {
+        return this.column;
     }
 
-    public String getFila() {
-        return this.fila;
+    public String getRow() {
+        return this.row;
     }
 
-    public String getNombre() {
-        return this.nombre;
+    public String getName() {
+        return this.name;
     }
+
 }
 
 
