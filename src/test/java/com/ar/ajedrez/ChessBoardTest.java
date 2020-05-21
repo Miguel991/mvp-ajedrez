@@ -23,7 +23,7 @@ public class ChessBoardTest {
     }
 
     @Test
-    public void moverUnPeonUnaCasillaEnSuPrimerMovimiento(){
+    public void moverUnPeonUnaCasilla(){
 
         this.board.boardConfig(this.configPosicionFicha);
         this.board.movePiece(Position.A2, Position.A3);
