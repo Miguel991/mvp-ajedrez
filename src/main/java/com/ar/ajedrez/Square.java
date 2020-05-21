@@ -39,4 +39,8 @@ public class Square {
     public boolean isOcuppied() {
         return this.piece == null? false : true;
     }
+
+    public boolean contain(Position destination) {
+        return this.neighbour.containsValue(destination);
+    }
 }

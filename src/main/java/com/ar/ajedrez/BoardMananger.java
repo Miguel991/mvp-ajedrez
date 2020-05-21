@@ -23,12 +23,22 @@ public class BoardMananger {
 
             dest = this.board.getSquareByPosition( source.getNeighbourByCardinality( cardinalities.get(0) ));
 
+            if(!areNeighbour(origin , destination)) {
+                Position north = dest.getNeighbourByCardinality(cardinalities.get(0));
+                dest = this.board.getSquareByPosition( north );
+            }
+
             dest.setPiece(piece);
 
             source.setPiece(null);
 
         }
 
+    }
+
+    private boolean areNeighbour(Position source , Position destination) {
+        Square src = this.board.getSquareByPosition(source);
+        return src.contain(destination);
     }
 
 }
