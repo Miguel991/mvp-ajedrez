@@ -12,7 +12,7 @@ public class Pawn extends Piece {
 
     @Override
     public List<Cardinality> getMoves() {
-        return Arrays.asList(Cardinality.NORTH);
+        return Arrays.asList(Cardinality.NORTH, Cardinality.NORTHEAST);
     }
 
 }

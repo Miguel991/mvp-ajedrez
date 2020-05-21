@@ -1,6 +1,8 @@
 package com.ar.ajedrez;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 
 public class Square {
 
@@ -34,6 +36,15 @@ public class Square {
 
     public Position getNeighbourByCardinality(Cardinality cardinality){
         return this.neighbour.get(cardinality);
+    }
+
+    public List<Position> getNeighboursByCardinalities(List<Cardinality> cardinalities){
+
+        List<Position> positions = new ArrayList<>();
+        for ( Cardinality cardinality:  cardinalities) {
+            positions.add(getNeighbourByCardinality(cardinality));
+        }
+        return positions;
     }
 
     public boolean isOcuppied() {

@@ -32,4 +32,15 @@ public class Board {
     public Square getSquareByPosition(Position origin) {
        return this.square.get(origin);
     }
+
+    public List<Square> getSquaresByPositions(List<Position> destPositions) {
+
+       List<Square> squareList = new ArrayList<>();
+
+       for (Position position: destPositions) {
+            squareList.add(getSquareByPosition(position));
+        }
+
+       return squareList;
+    }
 }

@@ -13,22 +13,48 @@ public class BoardMananger {
     public void movePiece(Position origin, Position destination) {
 
         Square source = this.board.getSquareByPosition(origin);
-        Square dest =  null;
+        Square destiny = this.board.getSquareByPosition(destination);
+
+        List<Square> dest =  null;
+        List<Position> destPositions = null;
 
         if(source.isOcuppied()){
 
             Piece piece = source.getPiece();
 
-            List<Cardinality> cardinalities = piece.getMoves();
+            destPositions = source.getNeighboursByCardinalities( piece.getMoves());
 
-            dest = this.board.getSquareByPosition( source.getNeighbourByCardinality( cardinalities.get(0) ));
+            dest = this.board.getSquaresByPositions(destPositions);
 
-            if(!areNeighbour(origin , destination)) {
-                Position north = dest.getNeighbourByCardinality(cardinalities.get(0));
-                dest = this.board.getSquareByPosition( north );
+            if(dest.contains(destiny)){
+
+                if(destiny.isOcuppied()){
+
+                    Piece pieceOnDestiny = destiny.getPiece();
+
+                    if(pieceOnDestiny.getColor() != piece.getColor() ){
+
+                        destiny.setPiece(piece);
+                        source.setPiece(null);
+
+                    }
+
+                }
+
             }
 
-            dest.setPiece(piece);
+            if(!areNeighbour(origin , destination)) {
+
+                Position north = source.getNeighbourByCardinality(piece.getMoves().get(0));
+
+                Square squareNorth = this.board.getSquareByPosition(north);
+
+                Position secondNorth = squareNorth.getNeighbourByCardinality(piece.getMoves().get(0));
+
+                destiny = this.board.getSquareByPosition( secondNorth );
+            }
+
+            destiny.setPiece(piece);
 
             source.setPiece(null);
 

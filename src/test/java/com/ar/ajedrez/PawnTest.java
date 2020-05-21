@@ -50,4 +50,23 @@ public class PawnTest {
         assertThat(pieceEsperada.getName()).isEqualTo("P");
         assertThat(posicionVacia).isNull();
     }
+
+    @Test
+    public void capturarPieza(){
+
+        List<WrapperConfigBoard> configBoard = new ArrayList<>();
+        WrapperConfigBoard peonBlanco = new WrapperConfigBoard(Position.A2, new Pawn(Color.WHITE));
+        WrapperConfigBoard peonNegro= new WrapperConfigBoard(Position.B3, new Pawn(Color.BLACK));
+
+        configBoard.add(peonBlanco);
+        configBoard.add(peonNegro);
+
+        this.board.boardConfig(configBoard);
+        this.board.movePiece(Position.A2, Position.B3);
+
+        Piece expected = this.board.getPiece(Position.B3);
+
+        assertThat(expected.getColor()).isEqualTo(Color.WHITE);
+
+    }
 }
