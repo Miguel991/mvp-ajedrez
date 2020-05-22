@@ -73,6 +73,24 @@ public class PawnTest {
     @Test
     public void elPeonNoPuedeAvanzarSiExisteUnaPiezaEnLaCasillaSiguiente(){
 
+        List<WrapperConfigBoard> configBoard = new ArrayList<>();
+        WrapperConfigBoard peonBlanco = new WrapperConfigBoard(Position.A2, new Pawn(Color.WHITE));
+        WrapperConfigBoard peonNegro= new WrapperConfigBoard(Position.A3, new Pawn(Color.BLACK));
+
+        configBoard.add(peonBlanco);
+        configBoard.add(peonNegro);
+
+        this.board.boardConfig(configBoard);
+        this.board.movePiece(Position.A2, Position.A3);
+
+        Piece piezaBlanca = this.board.getPiece(Position.A2);
+        Piece  piezaNegra = this.board.getPiece(Position.A3);
+
+        assertThat(piezaBlanca).isNotNull();
+        assertThat(piezaBlanca.getColor()).isEqualTo(Color.WHITE);
+
+        assertThat(piezaNegra).isNotNull();
+        assertThat(piezaNegra.getColor()).isEqualTo(Color.BLACK);
     }
 
     @Test

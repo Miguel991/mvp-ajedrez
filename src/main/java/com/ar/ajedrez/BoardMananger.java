@@ -28,17 +28,24 @@ public class BoardMananger {
 
             if(dest.contains(destiny)){
 
-                if(destiny.isOcuppied()){
+                if(source.getNeighbourByCardinality(Cardinality.NORTH).equals(destiny.getPosition())){
 
-                    Piece pieceOnDestiny = destiny.getPiece();
-
-                    if(pieceOnDestiny.getColor() != piece.getColor() ){
-
-                        destiny.setPiece(piece);
-                        source.setPiece(null);
-
+                    if(!destiny.isOcuppied()){
+                        movePieceOnBoard(source, destiny, piece);
                     }
 
+                }else{
+
+                    if(destiny.isOcuppied()){
+
+                        Piece pieceOnDestiny = destiny.getPiece();
+
+                        if(pieceOnDestiny.getColor() != piece.getColor() ){
+
+                            movePieceOnBoard(source, destiny, piece);
+
+                        }
+                    }
                 }
 
             }
@@ -52,13 +59,18 @@ public class BoardMananger {
                 Position secondNorth = squareNorth.getNeighbourByCardinality(piece.getMoves().get(0));
 
                 destiny = this.board.getSquareByPosition( secondNorth );
+
+                movePieceOnBoard(source, destiny, piece);
+
             }
-
-            destiny.setPiece(piece);
-
-            source.setPiece(null);
-
         }
+
+    }
+
+    private void movePieceOnBoard(Square source, Square destiny, Piece piece) {
+
+        destiny.setPiece(piece);
+        source.setPiece(null);
 
     }
 
