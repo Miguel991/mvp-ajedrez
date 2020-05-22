@@ -69,4 +69,31 @@ public class PawnTest {
         assertThat(expected.getColor()).isEqualTo(Color.WHITE);
 
     }
+
+    @Test
+    public void elPeonNoPuedeAvanzarSiExisteUnaPiezaEnLaCasillaSiguiente(){
+
+    }
+
+    @Test
+    public void noPUedeCapturarUnaPiezaDelMismoColor(){
+
+    }
+
+    @Test
+    public void moverDosCasillasSiEsSuPrimerMovimiento(){
+
+    }
+
+    @Test
+    public void moverDosCasillasSiLaCasillaDestinoNoEstaOcupada(){
+
+    }
+
+    @Test
+    public void capturarAlPaso(){
+
+    }
+
+
 }
